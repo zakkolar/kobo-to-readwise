@@ -10,7 +10,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// if necessary, change this to the path to your Kobo device
+// if necessary, change this to the path to your Kobo device. Do not use a trailing slash.
 const koboPath = '/Volumes/KOBOeReader';
 
 
@@ -18,15 +18,6 @@ const db = await open({
     filename: `${koboPath}/.kobo/KoboReader.sqlite`,
     driver: sqlite3.Database
 })
-
-// const tables = await db.all("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
-//
-// console.log(tables);
-//
-// const content = await db.all("SELECT * FROM content WHERE Title LIKE '%Permanent%'");
-// console.log(content);
-
-// const bookmarks = await db.all("SELECT * FROM Bookmark");
 
 const bookmarks = await db.all(`SELECT b.Text as highlight, b.startContainerPath, b.DateCreated as date, b.Annotation as note, book.Title as title, book.Attribution as author 
     FROM Bookmark b 
