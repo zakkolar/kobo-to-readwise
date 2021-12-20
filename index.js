@@ -10,9 +10,12 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// if necessary, change this to the path to your Kobo device
+const koboPath = '/Volumes/KOBOeReader';
+
 
 const db = await open({
-    filename: '/Volumes/KOBOeReader/.kobo/KoboReader.sqlite',
+    filename: `${koboPath}/.kobo/KoboReader.sqlite`,
     driver: sqlite3.Database
 })
 
