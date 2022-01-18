@@ -106,7 +106,13 @@ annotationFiles.forEach(annotationFile => {
 
     annotationFileBookIds.push(makeId(title, author));
 
-    const annotations = document.annotationSet.annotation;
+    let annotations = document.annotationSet.annotation || [];
+
+    if(!Array.isArray(annotations)){
+        annotations = [annotations];
+    }
+
+
 
     annotations.forEach(annotation => {
         const target = annotation.target.fragment;
